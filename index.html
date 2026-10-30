@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Venta de Inmueble y Reparto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .section-title {
+            font-size: 1.1em;
+            color: #2980b9;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        label {
+            flex: 2;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+        input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: right;
+            font-size: 1em;
+        }
+        .results {
+            background-color: #e8f8f5;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 25px;
+            border: 1px solid #a3e4d7;
+        }
+        .results p {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            font-weight: bold;
+        }
+        .socio-result {
+            background-color: #fcf3cf;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border: 1px solid #f9e79f;
+        }
+        .socio-result p {
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+        button {
+            width: 100%;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1.1em;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #219653;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Calculadora de Venta de Inmueble y Reparto</h2>
+
+    <div class="section-title">1. Valor de Venta</div>
+    <div class="form-group">
+        <label for="valorVenta">Precio Total de Venta:</label>
+        <input type="text" id="valorVenta" value="100.000" oninput="formatearInput(this); calcular();">
+    </div>
+
+    <div class="section-title">2. Gastos (Porcentajes editables y Montos Fijos)</div>
+    <div class="form-group">
+        <label for="porcInmobiliaria">Inmobiliaria (%):</label>
+        <input type="text" id="porcInmobiliaria" value="3" oninput="calcular()">
+    </div>
+    <div class="form-group">
+        <label for="porcSellos">Impuesto de Sellos (%):</label>
+        <input type="text" id="porcSellos" value="1" oninput="calcular()">
+    </div>
+    <div class="form-group">
+        <label for="porcEscrituracion">Gastos de Escrituración (%):</label>
+        <input type="text" id="porcEscrituracion" value="2,5" oninput="calcular()">
+    </div>
+    <div class="form-group">
+        <label for="montoParcelario">Gastos de Estado Parcelario ($):</label>
+        <input type="text" id="montoParcelario" value="500" oninput="formatearInput(this); calcular();">
+    </div>
+    <div class="form-group">
+        <label for="montoAgrimensor">Gastos del Agrimensor ($):</label>
+        <input type="text" id="montoAgrimensor" value="800" oninput="formatearInput(this); calcular();">
+    </div>
+
+    <div class="section-title">3. Pretensiones de los Socios (Libres de gastos)</div>
+    <div class="form-group">
+        <label for="socio1Exigido">Exigido Socio 1:</label>
+        <input type="text" id="socio1Exigido" value="30.000" oninput="formatearInput(this); calcular();">
+    </div>
+    <div class="form-group">
+        <label for="socio2Exigido">Exigido Socio 2:</label>
+        <input type="text" id="socio2Exigido" value="30.000" oninput="formatearInput(this); calcular();">
+    </div>
+    <div class="form-group">
+        <label for="socio3Exigido">Exigido Socio 3:</label>
+        <input type="text" id="socio3Exigido" value="30.000" oninput="formatearInput(this); calcular();">
+    </div>
+
+    <button onclick="calcular()">Calcular</button>
+
+    <div class="results">
+        <p><span>Total de Gastos:</span> <span id="resGastos">$0,00</span></p>
+        <p><span>Subtotal Neto (Venta - Gastos):</span> <span id="resSubtotal">$0,00</span></p>
+        <p><span>Total Exigido por los 3 Socios:</span> <span id="resTotalExigido">$0,00</span></p>
+        <p><span>Diferencia (Sobrante / Faltante):</span> <span id="resDiferencia">$0,00</span></p>
+    </div>
+
+    <div class="socio-result" id="detalleReparto">
+        <strong>Detalle del Reparto Final:</strong>
+        <p id="resSocio1">Socio 1: -</p>
+        <p id="resSocio2">Socio 2: -</p>
+        <p id="resSocio3">Socio 3: -</p>
+    </div>
+</div>
+
+<script>
+// Función para agregar puntos de miles automáticamente mientras se escribe
+function formatearInput(input) {
+    let valor = input.value.replace(/\./g, ''); // Quitamos puntos previos
+    if (isNaN(valor) || valor === "") return;
+    input.value = Number(valor).toLocaleString('es-AR');
+}
+
+// Función auxiliar para convertir el texto formateado a número flotante para operar
+function limpiarNumero(id) {
+    let val = document.getElementById(id).value;
+    if (!val) return 0;
+    // Reemplazamos puntos de miles por nada y comas por puntos decimales
+    let limpio = val.toString().replace(/\./g, '').replace(',', '.');
+    return parseFloat(limpio) || 0;
+}
+
+// Función para formatear un número a moneda argentina con separador de miles y dos decimales
+function formatoMoneda(num) {
+    return '$ ' + num.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function calcular() {
+    // 1. Obtener valores limpios
+    let valorVenta = limpiarNumero('valorVenta');
+    
+    let porcInmobiliaria = limpiarNumero('porcInmobiliaria');
+    let porcSellos = limpiarNumero('porcSellos');
+    let porcEscrituracion = limpiarNumero('porcEscrituracion');
+    
+    let montoParcelario = limpiarNumero('montoParcelario');
+    let montoAgrimensor = limpiarNumero('montoAgrimensor');
+
+    let s1Exigido = limpiarNumero('socio1Exigido');
+    let s2Exigido = limpiarNumero('socio2Exigido');
+    let s3Exigido = limpiarNumero('socio3Exigido');
+
+    // 2. Calcular gastos
+    let gastoInmobiliaria = valorVenta * (porcInmobiliaria / 100);
+    let gastoSellos = valorVenta * (porcSellos / 100);
+    let gastoEscrituracion = valorVenta * (porcEscrituracion / 100);
+    
+    let totalGastos = gastoInmobiliaria + gastoSellos + gastoEscrituracion + montoParcelario + montoAgrimensor;
+    
+    // 3. Subtotal neto
+    let subtotalNeto = valorVenta - totalGastos;
+
+    // 4. Total exigido por los socios
+    let totalExigido = s1Exigido + s2Exigido + s3Exigido;
+
+    // 5. Diferencia
+    let diferencia = subtotalNeto - totalExigido;
+
+    let s1Final = s1Exigido;
+    let s2Final = s2Exigido;
+    let s3Final = s3Exigido;
+
+    let mensajeEstado = "";
+
+    if (subtotalNeto >= totalExigido) {
+        let sobrante = subtotalNeto - totalExigido;
+        let extraPorSocio = sobrante / 3;
+        
+        s1Final += extraPorSocio;
+        s2Final += extraPorSocio;
+        s3Final += extraPorSocio;
+        
+        mensajeEstado = `¡Alcanza y sobra! Sobrante total a repartir: ${formatoMoneda(sobrante)} (${formatoMoneda(extraPorSocio)} extra para cada uno).`;
+    } else {
+        mensajeEstado = `No alcanza para cubrir lo exigido por los socios (Faltan ${formatoMoneda(Math.abs(diferencia))} del neto).`;
+    }
+
+    // 6. Mostrar resultados
+    document.getElementById('resGastos').innerText = formatoMoneda(totalGastos);
+    document.getElementById('resSubtotal').innerText = formatoMoneda(subtotalNeto);
+    document.getElementById('resTotalExigido').innerText = formatoMoneda(totalExigido);
+    
+    let elemDiferencia = document.getElementById('resDiferencia');
+    elemDiferencia.innerText = formatoMoneda(diferencia);
+    elemDiferencia.style.color = diferencia >= 0 ? "green" : "red";
+
+    document.getElementById('resSocio1').innerText = `Socio 1 recibe: ${formatoMoneda(s1Final)} (Exigido: ${formatoMoneda(s1Exigido)})`;
+    document.getElementById('resSocio2').innerText = `Socio 2 recibe: ${formatoMoneda(s2Final)} (Exigido: ${formatoMoneda(s2Exigido)})`;
+    document.getElementById('resSocio3').innerText = `Socio 3 recibe: ${formatoMoneda(s3Final)} (Exigido: ${formatoMoneda(s3Exigido)})`;
+    
+    let detalleDiv = document.getElementById('detalleReparto');
+    let pEstado = document.getElementById('mensajeEstadoGlobal');
+    if (!pEstado) {
+        pEstado = document.createElement('p');
+        pEstado.id = 'mensajeEstadoGlobal';
+        pEstado.style.fontWeight = 'bold';
+        pEstado.style.marginTop = '10px';
+        detalleDiv.appendChild(pEstado);
+    }
+    pEstado.innerText = mensajeEstado;
+    pEstado.style.color = diferencia >= 0 ? "#117a65" : "#c0392b";
+}
+
+window.onload = calcular;
+</script>
+
+</body>
+</html>
