@@ -116,7 +116,7 @@
     <div class="section-title">1. Valor de Venta</div>
     <div class="form-group">
         <label for="valorVenta">Precio Total de Venta:</label>
-        <input type="text" id="valorVenta" value="100.000" oninput="formatearInput(this); calcular();">
+        <input type="text" id="valorVenta" value="1.200.000" oninput="formatearInput(this); calcular();">
     </div>
 
     <div class="section-title">2. Gastos (Porcentajes editables y Montos Fijos)</div>
@@ -133,35 +133,35 @@
         <input type="text" id="porcEscrituracion" value="2,5" oninput="calcular()">
     </div>
     <div class="form-group">
-        <label for="montoParcelario">Estado Parcelario ($):</label>
-        <input type="text" id="montoParcelario" value="500" oninput="formatearInput(this); calcular();">
+        <label for="montoParcelario">Estado Parcelario (USD):</label>
+        <input type="text" id="montoParcelario" value="20" oninput="formatearInput(this); calcular();">
     </div>
     <div class="form-group">
-        <label for="montoAgrimensor">Agrimensor ($):</label>
-        <input type="text" id="montoAgrimensor" value="800" oninput="formatearInput(this); calcular();">
+        <label for="montoAgrimensor">Agrimensor (USD):</label>
+        <input type="text" id="montoAgrimensor" value="200" oninput="formatearInput(this); calcular();">
     </div>
 
-    <div class="section-title">3. Pretensiones de los Socios (Libres de gastos)</div>
+    <div class="section-title">3. Pretensiones de los Socios (USD Libre de gastos)</div>
     <div class="form-group">
         <label for="socio1Exigido">Exigido Socio 1:</label>
-        <input type="text" id="socio1Exigido" value="30.000" oninput="formatearInput(this); calcular();">
+        <input type="text" id="socio1Exigido" value="300.000" oninput="formatearInput(this); calcular();">
     </div>
     <div class="form-group">
         <label for="socio2Exigido">Exigido Socio 2:</label>
-        <input type="text" id="socio2Exigido" value="30.000" oninput="formatearInput(this); calcular();">
+        <input type="text" id="socio2Exigido" value="300.000" oninput="formatearInput(this); calcular();">
     </div>
     <div class="form-group">
         <label for="socio3Exigido">Exigido Socio 3:</label>
-        <input type="text" id="socio3Exigido" value="30.000" oninput="formatearInput(this); calcular();">
+        <input type="text" id="socio3Exigido" value="450.000" oninput="formatearInput(this); calcular();">
     </div>
 
     <button onclick="calcular()">Calcular</button>
 
     <div class="results">
-        <p><span>Total de Gastos:</span> <span id="resGastos">$0,00</span></p>
-        <p><span>Subtotal Neto (Venta - Gastos):</span> <span id="resSubtotal">$0,00</span></p>
-        <p><span>Total Exigido por los 3 Socios:</span> <span id="resTotalExigido">$0,00</span></p>
-        <p><span>Diferencia (Sobrante / Faltante):</span> <span id="resDiferencia">$0,00</span></p>
+        <p><span>Total de Gastos:</span> <span id="resGastos">USD 0,00</span></p>
+        <p><span>Subtotal Neto (Venta - Gastos):</span> <span id="resSubtotal">USD 0,00</span></p>
+        <p><span>Total Exigido por los 3 Socios:</span> <span id="resTotalExigido">USD 0,00</span></p>
+        <p><span>Diferencia (Sobrante / Faltante):</span> <span id="resDiferencia">USD 0,00</span></p>
     </div>
 
     <div class="socio-result" id="detalleReparto">
@@ -191,7 +191,7 @@ function limpiarNumero(id) {
 
 // Función para formatear un número a moneda argentina con separador de miles y dos decimales
 function formatoMoneda(num) {
-    return '$ ' + num.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return 'USD ' + num.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function calcular() {
