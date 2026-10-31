@@ -51,6 +51,23 @@
             text-align: right;
             font-size: 1em;
         }
+        
+        /* Adaptación para pantallas móviles */
+        @media (max-width: 600px) {
+            .form-group {
+                flex-direction: column;
+                align-items: stretch;
+                margin-bottom: 16px;
+            }
+            label {
+                margin-bottom: 6px;
+            }
+            input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+
         .results {
             background-color: #e8f8f5;
             padding: 15px;
