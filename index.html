@@ -238,7 +238,7 @@ function calcular() {
         s2Final += extraPorSocio;
         s3Final += extraPorSocio;
         
-        mensajeEstado = `¡Alcanza y sobra! Sobrante total a repartir: ${formatoMoneda(sobrante)} (${formatoMoneda(extraPorSocio)} extra para cada uno).`;
+        mensajeEstado = `A repartir extra exigido: ${formatoMoneda(sobrante)} (${formatoMoneda(extraPorSocio)} extra para cada uno).`;
     } else {
         mensajeEstado = `No alcanza para cubrir lo exigido por los socios (Faltan ${formatoMoneda(Math.abs(diferencia))} del neto).`;
     }
@@ -252,9 +252,9 @@ function calcular() {
     elemDiferencia.innerText = formatoMoneda(diferencia);
     elemDiferencia.style.color = diferencia >= 0 ? "green" : "red";
 
-    document.getElementById('resSocio1').innerText = `Socio 1 recibe: ${formatoMoneda(s1Final)} (Exigido: ${formatoMoneda(s1Exigido)})`;
-    document.getElementById('resSocio2').innerText = `Socio 2 recibe: ${formatoMoneda(s2Final)} (Exigido: ${formatoMoneda(s2Exigido)})`;
-    document.getElementById('resSocio3').innerText = `Socio 3 recibe: ${formatoMoneda(s3Final)} (Exigido: ${formatoMoneda(s3Exigido)})`;
+    document.getElementById('resSocio1').innerText = `Socio 1 recibe: ${formatoMoneda(s1Final)}`;
+    document.getElementById('resSocio2').innerText = `Socio 2 recibe: ${formatoMoneda(s2Final)}`;
+    document.getElementById('resSocio3').innerText = `Socio 3 recibe: ${formatoMoneda(s3Final)}`;
     
     let detalleDiv = document.getElementById('detalleReparto');
     let pEstado = document.getElementById('mensajeEstadoGlobal');
